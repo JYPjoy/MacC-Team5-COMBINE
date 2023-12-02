@@ -84,7 +84,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
 
     private let ttekkkochiCollectionViewElement: UIAccessibilityElement = {
         let element = UIAccessibilityElement(accessibilityContainer: TtekkkochiViewController.self)
-        element.accessibilityLabel = "조금만 더 아래로 가면 돼! '만약에' 떡과, '아니면' 떡을 활용해 순서에 맞게 끼워보렴"
         return element
     }()
     
@@ -168,48 +167,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
             .store(in: &cancellable)
             
         startRecordingDeviceMotion() // 조건 걸어서 1번만 실행되도록 해야 함
-        
-//        self.bottomView.$selectedValue
-//            .zip(bottomView.$initialValue)
-//            .sink { [weak self] value in
-//                guard let index = self?.blockIndex else { return }
-//                guard value.1 else { return }
-//                guard let self = self else { return }
-//        
-//                // 정답일 때
-//                if (index > -1 && index < 5) && (answerBlocks[index].value == value.0) {
-//                    answerBlocks[index].isShowing = true
-//                    DispatchQueue.global().async {
-//                        SoundManager.shared.playSound(sound: .bell)
-//                    }
-//
-//                    for idx in (0...4) where selectBlocks[idx].value == value.0 {
-//                        selectBlocks[idx].isAccessible = false
-//                        selectBlocks[idx].isShowing = false
-//                    }
-//                    
-//                    self.ttekkkochiCollectionView.reloadData()
-//                    self.blockIndex += 1
-//                    
-//                    switch index {
-//                    case 4:
-//                        answerBlocks[index].isShowing = true
-//                        self.bottomView.isHidden = true
-//                        self.nextButton.isHidden = false
-//                        nextButton.setup(model: settingButtonViewModel)
-//                        self.ttekkkochiCollectionView.reloadData()
-//                        titleLabel.text = "잘했어! 떡꼬치가 잘 만들어졌는지 한번 잘 들어봐!"
-//                        ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아먹는다\n잘 만들었는데? 이제 호랑이에게 주자!"
-//                        UIAccessibility.post(notification: .layoutChanged, argument: titleLabel)
-//                    default:
-//                        return
-//                    }
-//                } else {
-//                    self.hapticManager = HapticManager()
-//                    self.hapticManager?.playNomNom()
-//                }
-//            }
-//            .store(in: &cancellable)
     }
     
     func initializeView() {
@@ -224,8 +181,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
     @objc
     func popThisView() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.ttekkkochiCollectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { self.ttekkkochiCollectionView.reloadData()
         }
         
         self.navigationController?.pushViewController(CustomAlert(), animated: false)
@@ -274,20 +230,24 @@ extension TtekkkochiViewController {
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
                 
                 if acceleration.y > 1 && acceleration.z < 0 {
-//                    print("==============")
-//                    Log.c(acceleration.x)
-//                    Log.c(acceleration.y)
-//                    Log.c(acceleration.z)
-//                    print("==============")
-//                    
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
-                    DispatchQueue.global().async {
-                        SoundManager.shared.playSound(sound: .bell)
-                    }
+                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self.ttekkkochiCollectionView.reloadData()
+                    
+                    self.titleLabel.text = """
+                       잘했어! 이번에는 아니면을 채우기 위해 화면을 좌우로 흔들어봐!
+                       """
+                    self.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
+//                    
+//                    if acceleration.x > 0 || acceleration.x < 0 {
+//                        (3...4).forEach { answerBlocks[$0].isShowing = true }
+//                        DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
+//                        self.ttekkkochiCollectionView.reloadData()
+//                        self.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아먹는다\n잘 만들었는데? 이제 호랑이에게 주자!"
+//                    }
                 }
+
             }
-            
             self.motionManager.stopAccelerometerUpdates()
         }
     }

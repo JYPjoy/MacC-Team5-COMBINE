@@ -219,36 +219,34 @@ extension TtekkkochiViewController {
         // 모션 갱신 주기 설정 (10Hz)
         motionManager.deviceMotionUpdateInterval = 0.1
         // Device motion 업데이트 받기 시작
-        motionManager.startDeviceMotionUpdates(to: .main) { (deviceMotion: CMDeviceMotion?, error: Error?) in
-            guard let data = deviceMotion, error == nil else {
-                print("Failed to get device motion data: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
+        motionManager.startDeviceMotionUpdates(to: .main) { [weak self] (data, error) in
+            guard let data = data, error == nil else {return}
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
             let shakeThreshold = 0.5  // 흔들기 인식 강도
+            
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
                 
-                if acceleration.y > 1 && acceleration.z < 0 {
-                    (0...2).forEach { answerBlocks[$0].isShowing = true }
-                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
-                    self.ttekkkochiCollectionView.reloadData()
-                    
-                    self.titleLabel.text = """
-                       잘했어! 이번에는 아니면을 채우기 위해 화면을 좌우로 흔들어봐!
-                       """
-                    self.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
+                print("==============")
+                Log.i(acceleration.x)
+                Log.i(acceleration.y)
+                Log.i(acceleration.z)
+                print("==============")
+                
+//                if acceleration.y > 1 && acceleration.z < 0 {
+//                    (0...2).forEach { answerBlocks[$0].isShowing = true }
+//                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
+//                    self?.ttekkkochiCollectionView.reloadData()
 //                    
-//                    if acceleration.x > 0 || acceleration.x < 0 {
-//                        (3...4).forEach { answerBlocks[$0].isShowing = true }
-//                        DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
-//                        self.ttekkkochiCollectionView.reloadData()
-//                        self.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아먹는다\n잘 만들었는데? 이제 호랑이에게 주자!"
-//                    }
-                }
+//                    self?.titleLabel.text = """
+//                       잘했어! 이번에는 아니면을 채우기 위해 화면을 좌우로 흔들어봐!
+//                       """
+//                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
+//
+//                }
 
             }
-            self.motionManager.stopAccelerometerUpdates()
+            self?.motionManager.stopAccelerometerUpdates()
         }
     }
     

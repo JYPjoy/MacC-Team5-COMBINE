@@ -48,7 +48,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         label.text = """
         화면 중앙에 다섯 개의 떡들로 이루어진 떡꼬치가 있어.
         
-        핸드폰 화면이 땅을 바라보도록 오른쪽에서 왼쪽으로 책장 넘기듯 핸드폰을 뒤집어 볼까?
+        마치 부메랑 던지듯 왼쪽에서 오른쪽으로 딱 한 번만 핸드폰을 움직여 볼까?
         """
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FontManager.body()
@@ -71,7 +71,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         view.register(TtekkkochiCollectionViewCell.self, forCellWithReuseIdentifier: TtekkkochiCollectionViewCell.identifier)
         view.isAccessibilityElement = false
         view.backgroundColor = .clear
-        //view.backgroundColor = .systemRed
         view.dataSource = self
         view.delegate = self
         return view
@@ -94,13 +93,14 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         setupNavigationBar()
         addComponents()
         setConstraints()
+        startRecordingDeviceMotion()
         nextButton.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        binding()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//        binding()
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -165,8 +165,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
                 self?.navigationController?.pushViewController(nextView, animated: false)
             })
             .store(in: &cancellable)
-            
-        startRecordingDeviceMotion() // 조건 걸어서 1번만 실행되도록 해야 함
     }
     
     func initializeView() {
@@ -180,7 +178,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
     
     @objc
     func popThisView() {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { self.ttekkkochiCollectionView.reloadData()
         }
         
@@ -209,13 +206,14 @@ extension TtekkkochiViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TtekkkochiViewController {
+    
     func startRecordingDeviceMotion() {
+        
         // Device motion을 수집 가능한지 확인
         guard motionManager.isDeviceMotionAvailable else {
             Log.e("Device motion data is not available")
             return
         }
-        
         // 모션 갱신 주기 설정 (10Hz)
         motionManager.deviceMotionUpdateInterval = 0.1
         // Device motion 업데이트 받기 시작
@@ -224,43 +222,17 @@ extension TtekkkochiViewController {
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
             let shakeThreshold = 0.5  // 흔들기 인식 강도
-            
+
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                
-                print("==============")
-                Log.i(acceleration.x)
-                Log.i(acceleration.y)
-                Log.i(acceleration.z)
-                print("==============")
-                
                 if acceleration.x < 2.5 {
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
-                    
-                    // TODO: 다음 화면으로 이동하기
-                    
-//                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
-//                    self?.ttekkkochiCollectionView.reloadData()
-//                    
-//                    self?.titleLabel.text = """
-//                           잘했어! 이번에는 아니면을 채우기 위해 화면을 좌우로 흔들어봐!
-//                           """
-//                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
-//                    self?.stopRecordingDeviceMotion()
+                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
+                    self?.ttekkkochiCollectionView.reloadData()
+                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
+                    self?.motionManager.stopDeviceMotionUpdates()
+                    self?.navigationController?.pushViewController(TtekkkochiCompleteViewController(), animated: false)
                 }
-                
-//                if acceleration.y > 1 && acceleration.z < 0 {
-//                    (0...2).forEach { answerBlocks[$0].isShowing = true }
-//                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
-
-//
-//                }
-
             }
-            self?.motionManager.stopAccelerometerUpdates()
         }
-    }
-    
-    func stopRecordingDeviceMotion() {
-        motionManager.stopDeviceMotionUpdates()
     }
 }

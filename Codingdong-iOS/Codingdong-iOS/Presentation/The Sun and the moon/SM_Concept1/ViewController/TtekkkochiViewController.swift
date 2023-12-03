@@ -13,10 +13,8 @@ import CoreMotion
 final class TtekkkochiViewController: UIViewController, ConfigUI {
     var viewModel = TtekkkochiViewModel()
     private var cancellable = Set<AnyCancellable>()
-    private var blockIndex: Int = 0
     private var hapticManager: HapticManager?
     private let motionManager = CMMotionManager()
-    private var motionCount: Int = 0
     
     // MARK: - Components
     private let naviLine: UIView = {
@@ -48,7 +46,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         label.text = """
         화면 중앙에 다섯 개의 떡들로 이루어진 떡꼬치가 있어.
         
-        마치 부메랑 던지듯 왼쪽에서 오른쪽으로 딱 한 번만 핸드폰을 움직여 볼까?
+        마치 당근칼 펼치듯 오른쪽에서 왼쪽으로 딱 한 번만 핸드폰을 움직여 볼까?
         """
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FontManager.body()
@@ -96,11 +94,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         startRecordingDeviceMotion()
         nextButton.isHidden = true
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        binding()
-//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -155,16 +148,6 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         let leftBarButtonElement = setupLeftBackButtonItemAccessibility(label: "내 책장")
         ttekkkochiCollectionViewElement.accessibilityFrameInContainerSpace = ttekkkochiCollectionView.frame
         view.accessibilityElements = [titleLabel, ttekkkochiCollectionViewElement, nextButton, leftBarButtonElement]
-    }
-    
-    func binding() {
-        initializeView()
-        self.viewModel.route
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] nextView in
-                self?.navigationController?.pushViewController(nextView, animated: false)
-            })
-            .store(in: &cancellable)
     }
     
     func initializeView() {
@@ -224,7 +207,7 @@ extension TtekkkochiViewController {
             let shakeThreshold = 0.5  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if acceleration.x < 2.5 {
+                if acceleration.x < -2.5 {
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()

@@ -102,6 +102,8 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         setupAccessibility()
     }
     
+
+    
     func setupNavigationBar() {
         view.addSubview(naviLine)
         naviLine.snp.makeConstraints {
@@ -128,7 +130,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         ttekkkochiCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.left.right.equalToSuperview().inset(95)
-            $0.bottom.equalToSuperview().offset(-100)
+            $0.bottom.equalToSuperview().offset(-120)
         }
         
         stickView.snp.makeConstraints {
@@ -206,14 +208,14 @@ extension TtekkkochiViewController {
             guard let data = data, error == nil else {return}
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
-            let shakeThreshold = 0.3  // 흔들기 인식 강도
+            let shakeThreshold = 0.5  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if abs(acceleration.x) > 0 || abs(acceleration.z) > 0 {
+                if abs(acceleration.x) > 0 && abs(acceleration.z) < 0.5 && abs(acceleration.y) < 0.5 {
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()
-                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
+
                     self?.motionManager.stopDeviceMotionUpdates()
                     self?.navigationController?.pushViewController(TtekkkochiCompleteViewController(), animated: false)
                 }

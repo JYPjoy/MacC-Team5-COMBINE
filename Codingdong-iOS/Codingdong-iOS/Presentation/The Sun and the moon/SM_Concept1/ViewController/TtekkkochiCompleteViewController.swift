@@ -8,10 +8,13 @@
 import UIKit
 import CoreMotion
 import Log
+import Combine
 
 final class TtekkkochiCompleteViewController: UIViewController {
     private let motionManager = CMMotionManager()
     var viewModel = TtekkkochiViewModel()
+    private var cancellable = Set<AnyCancellable>()
+    
     // MARK: - Components
     private let naviLine: UIView = {
         let view = UIView()
@@ -97,6 +100,11 @@ final class TtekkkochiCompleteViewController: UIViewController {
         setupAccessibility()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        binding()
+    }
+    
     func setupNavigationBar() {
         view.addSubview(naviLine)
         naviLine.snp.makeConstraints {
@@ -123,7 +131,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
         ttekkkochiCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.left.right.equalToSuperview().inset(95)
-            $0.bottom.equalToSuperview().offset(-100)
+            $0.bottom.equalToSuperview().offset(-120)
         }
         
         stickView.snp.makeConstraints {
@@ -151,6 +159,16 @@ final class TtekkkochiCompleteViewController: UIViewController {
         (0...2).forEach { answerBlocks[$0].isShowing = true }
         (3...4).forEach { answerBlocks[$0].isShowing = false }
         ttekkkochiCollectionView.reloadData()
+    }
+    
+    func binding() {
+        initializeView()
+        self.viewModel.route
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] nextView in
+                self?.navigationController?.pushViewController(nextView, animated: false)
+            })
+            .store(in: &cancellable)
     }
     
     @objc
@@ -200,7 +218,7 @@ extension TtekkkochiCompleteViewController {
             let shakeThreshold = 0.5  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if abs(acceleration.y) > 0 {
+                if abs(acceleration.y) > 0 && abs(acceleration.x) < 0.5 && abs(acceleration.z) < 0.5 {
                     (3...4).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+extension Double {
+    func toDegrees() -> Double {
+        self * 180 / .pi
+    }
+}

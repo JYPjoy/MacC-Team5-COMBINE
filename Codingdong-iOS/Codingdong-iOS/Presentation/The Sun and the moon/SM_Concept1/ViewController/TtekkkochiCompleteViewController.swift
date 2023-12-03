@@ -43,7 +43,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
     private let titleLabel: UILabel = {
        let label = UILabel()
         label.text = """
-        잘했어! 총 다섯 개의 떡 중 세 개의 떡이 채워졌어.
+        잘했어! 총 다섯 개의 떡 중 세 개의 떡이 채워졌어. 만약에, 떡 하나 주면, 안 잡아 먹는다
         
         이번에는 과자 봉지 흔들듯 핸드폰을 위 아래로 흔들어 볼까?
         """
@@ -130,13 +130,13 @@ final class TtekkkochiCompleteViewController: UIViewController {
         ttekkkochiCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.left.right.equalToSuperview().inset(95)
-            $0.bottom.equalToSuperview().offset(-120)
+            $0.bottom.equalToSuperview().offset(-115)
         }
         
         stickView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(28)
             $0.left.right.equalToSuperview().inset(191)
-            $0.bottom.equalToSuperview().offset(-120)
+            $0.bottom.equalToSuperview().offset(-115)
         }
         
         self.view.sendSubviewToBack(stickView)
@@ -159,7 +159,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
         (3...4).forEach { answerBlocks[$0].isShowing = false }
         ttekkkochiCollectionView.reloadData()
     }
-//    
+   
     func binding() {
         initializeView()
         self.viewModel.route
@@ -217,12 +217,12 @@ extension TtekkkochiCompleteViewController {
             let shakeThreshold = 0.5  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if abs(acceleration.y) > 0 && abs(acceleration.x) < 0.5 && abs(acceleration.z) < 0.5 {
+                if abs(acceleration.x) < 0.5 && abs(acceleration.y) > 0 && abs(acceleration.z) < 0.5 {
                     (3...4).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()
                     self?.titleLabel.text = "잘했어! 떡꼬치가 잘 만들어졌는지 들어봐!"
-                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아 먹는다!"
+                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아 먹는다!\n그럼 호랑이가 갔는지 한 번 살펴 볼까 \n 다음으로 버튼을 눌러보자! 어서"
                     UIAccessibility.post(notification: .layoutChanged, argument: self?.titleLabel)
                     
                     

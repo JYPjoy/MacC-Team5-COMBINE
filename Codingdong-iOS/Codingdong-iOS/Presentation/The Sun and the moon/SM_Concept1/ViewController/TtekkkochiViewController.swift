@@ -46,7 +46,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         label.text = """
         화면 중앙에 다섯 개의 떡들로 이루어진 떡꼬치가 있어.
         
-        마치 당근칼 펼치듯 오른쪽에서 왼쪽으로 딱 한 번만 핸드폰을 움직여 볼까?
+        핸드폰을 오른쪽에서 왼쪽으로 책장 넘기듯 휙 빠르게 뒤집어 볼까?
         """
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FontManager.body()
@@ -208,18 +208,28 @@ extension TtekkkochiViewController {
             guard let data = data, error == nil else {return}
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
-            let shakeThreshold = 0.3  // 흔들기 인식 강도
 
-            if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if abs(acceleration.x) > 0 && abs(acceleration.z) < 0.3 && abs(acceleration.y) < 0.3 {
-                    (0...2).forEach { answerBlocks[$0].isShowing = true }
-                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
-                    self?.ttekkkochiCollectionView.reloadData()
-
-                    self?.motionManager.stopDeviceMotionUpdates()
-                    self?.navigationController?.pushViewController(TtekkkochiCompleteViewController(), animated: false)
-                }
+            if (abs(acceleration.x).toDegrees() > 90 && abs(acceleration.y).toDegrees() > 0 && abs(acceleration.z).toDegrees() > 45) {
+//                print("===========")
+//                Log.d(abs(acceleration.x).toDegrees())
+//                Log.d(abs(acceleration.y.toDegrees()))
+//                Log.d(abs(acceleration.z.toDegrees()))
+//                print("===========")
+//                
+                (0...2).forEach { answerBlocks[$0].isShowing = true }
+                DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
+                self?.ttekkkochiCollectionView.reloadData()
+                
+                self?.motionManager.stopDeviceMotionUpdates()
+                self?.navigationController?.pushViewController(TtekkkochiCompleteViewController(), animated: false)
             }
         }
+    }
+    
+    // get magnitude of vector via Pythagorean theorem
+    func magnitude(from attitude: CMAttitude) -> Double {
+        return sqrt(pow(attitude.roll, 2) +
+                pow(attitude.yaw, 2) +
+                pow(attitude.pitch, 2))
     }
 }

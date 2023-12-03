@@ -209,7 +209,7 @@ extension TtekkkochiViewController {
             let shakeThreshold = 0.3  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if abs(acceleration.x) > 0 {
+                if abs(acceleration.x) > 0 || abs(acceleration.z) > 0 {
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()

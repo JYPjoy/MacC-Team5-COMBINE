@@ -129,7 +129,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
         stickView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(28)
             $0.left.right.equalToSuperview().inset(191)
-            $0.bottom.equalToSuperview().offset(-100)
+            $0.bottom.equalToSuperview().offset(-120)
         }
         
         self.view.sendSubviewToBack(stickView)
@@ -197,7 +197,7 @@ extension TtekkkochiCompleteViewController {
             guard let data = data, error == nil else {return}
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
-            let shakeThreshold = 0.3  // 흔들기 인식 강도
+            let shakeThreshold = 0.5  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
                 if abs(acceleration.y) > 0 {
@@ -207,6 +207,7 @@ extension TtekkkochiCompleteViewController {
                     self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아 먹는다!"
                     self?.motionManager.stopDeviceMotionUpdates()
                     self?.nextButton.isHidden = false
+                    self?.nextButton.setup(model: self!.settingButtonViewModel)
 
                 }
             }

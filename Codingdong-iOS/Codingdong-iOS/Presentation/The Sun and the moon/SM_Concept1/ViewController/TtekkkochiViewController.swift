@@ -74,6 +74,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         return view
     }()
     
+    // TODO: 버튼 삭제
     private let nextButton = CommonButton()
     private lazy var settingButtonViewModel = CommonbuttonModel(title: "꼬치를 준다", font: FontManager.textbutton(), titleColor: .primary1, backgroundColor: .primary2) {[weak self] in
        self?.viewModel.selectItem()
@@ -92,6 +93,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         addComponents()
         setConstraints()
         startRecordingDeviceMotion()
+        initializeView()
         nextButton.isHidden = true
     }
     
@@ -204,10 +206,10 @@ extension TtekkkochiViewController {
             guard let data = data, error == nil else {return}
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
-            let shakeThreshold = 0.5  // 흔들기 인식 강도
+            let shakeThreshold = 0.3  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if acceleration.x < -2.5 {
+                if abs(acceleration.x) > 0 {
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()

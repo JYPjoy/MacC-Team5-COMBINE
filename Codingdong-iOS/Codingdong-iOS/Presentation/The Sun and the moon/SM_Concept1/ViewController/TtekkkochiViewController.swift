@@ -48,7 +48,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
         label.text = """
         화면 중앙에 다섯 개의 떡들로 이루어진 떡꼬치가 있어.
         
-        핸드폰 화면이 하늘을 바라보도록 아주 사알짝 딱 한 번만 뒤로 젖혀볼까?
+        핸드폰 화면이 땅을 바라보도록 오른쪽에서 왼쪽으로 책장 넘기듯 핸드폰을 뒤집어 볼까?
         """
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FontManager.body()
@@ -233,15 +233,25 @@ extension TtekkkochiViewController {
                 Log.i(acceleration.z)
                 print("==============")
                 
-//                if acceleration.y > 1 && acceleration.z < 0 {
-//                    (0...2).forEach { answerBlocks[$0].isShowing = true }
+                if acceleration.x < 2.5 {
+                    (0...2).forEach { answerBlocks[$0].isShowing = true }
+                    
+                    // TODO: 다음 화면으로 이동하기
+                    
 //                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
 //                    self?.ttekkkochiCollectionView.reloadData()
 //                    
 //                    self?.titleLabel.text = """
-//                       잘했어! 이번에는 아니면을 채우기 위해 화면을 좌우로 흔들어봐!
-//                       """
+//                           잘했어! 이번에는 아니면을 채우기 위해 화면을 좌우로 흔들어봐!
+//                           """
 //                    self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n!"
+//                    self?.stopRecordingDeviceMotion()
+                }
+                
+//                if acceleration.y > 1 && acceleration.z < 0 {
+//                    (0...2).forEach { answerBlocks[$0].isShowing = true }
+//                    DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
+
 //
 //                }
 

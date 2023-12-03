@@ -225,11 +225,4 @@ extension TtekkkochiViewController {
             }
         }
     }
-    
-    // get magnitude of vector via Pythagorean theorem
-    func magnitude(from attitude: CMAttitude) -> Double {
-        return sqrt(pow(attitude.roll, 2) +
-                pow(attitude.yaw, 2) +
-                pow(attitude.pitch, 2))
-    }
 }

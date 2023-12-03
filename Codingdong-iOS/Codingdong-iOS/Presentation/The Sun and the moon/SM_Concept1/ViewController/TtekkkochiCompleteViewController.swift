@@ -86,11 +86,12 @@ final class TtekkkochiCompleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gs90
-        initializeView()
+        //initializeView()
         setupNavigationBar()
         addComponents()
         setConstraints()
         detectMotion()
+        binding()
         nextButton.isHidden = true
     }
     
@@ -101,7 +102,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        binding()
+       // binding()
     }
     
     func setupNavigationBar() {
@@ -154,14 +155,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
         view.accessibilityElements = [titleLabel, ttekkkochiCollectionViewElement, nextButton, leftBarButtonElement]
     }
     
-    func initializeView() {
-        (0...2).forEach { answerBlocks[$0].isShowing = true }
-        (3...4).forEach { answerBlocks[$0].isShowing = false }
-        ttekkkochiCollectionView.reloadData()
-    }
-   
     func binding() {
-        initializeView()
         self.viewModel.route
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] nextView in
@@ -174,7 +168,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
     func popThisView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { self.ttekkkochiCollectionView.reloadData()
         }
-        
+//        
         self.navigationController?.pushViewController(CustomAlert(), animated: false)
     }
 }

@@ -149,6 +149,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
     }
     
     func setupAccessibility() {
+//        UIAccessibility.post(notification: ., argument: self.titleLabel)
         let leftBarButtonElement = setupLeftBackButtonItemAccessibility(label: "내 책장")
         ttekkkochiCollectionViewElement.accessibilityFrameInContainerSpace = ttekkkochiCollectionView.frame
         view.accessibilityElements = [titleLabel, ttekkkochiCollectionViewElement, nextButton, leftBarButtonElement]
@@ -208,10 +209,10 @@ extension TtekkkochiViewController {
             guard let data = data, error == nil else {return}
             // 필요한 센서값 불러오기
             let acceleration = data.userAcceleration
-            let shakeThreshold = 0.5  // 흔들기 인식 강도
+            let shakeThreshold = 0.3  // 흔들기 인식 강도
 
             if acceleration.x >= shakeThreshold || acceleration.y >= shakeThreshold || acceleration.z >= shakeThreshold {
-                if abs(acceleration.x) > 0 && abs(acceleration.z) < 0.5 && abs(acceleration.y) < 0.5 {
+                if abs(acceleration.x) > 0 && abs(acceleration.z) < 0.3 && abs(acceleration.y) < 0.3 {
                     (0...2).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()

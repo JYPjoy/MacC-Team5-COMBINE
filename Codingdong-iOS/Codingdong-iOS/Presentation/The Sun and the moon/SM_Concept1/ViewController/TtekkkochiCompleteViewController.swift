@@ -160,7 +160,7 @@ final class TtekkkochiCompleteViewController: UIViewController {
         (3...4).forEach { answerBlocks[$0].isShowing = false }
         ttekkkochiCollectionView.reloadData()
     }
-    
+//    
     func binding() {
         initializeView()
         self.viewModel.route
@@ -222,7 +222,11 @@ extension TtekkkochiCompleteViewController {
                     (3...4).forEach { answerBlocks[$0].isShowing = true }
                     DispatchQueue.global().async { SoundManager.shared.playSound(sound: .bell) }
                     self?.ttekkkochiCollectionView.reloadData()
+                    self?.titleLabel.text = "잘했어! 떡꼬치가 잘 만들어졌는지 들어봐!"
                     self?.ttekkkochiCollectionViewElement.accessibilityLabel = "만약에\n떡 하나 주면\n안 잡아먹는다\n아니면\n잡아 먹는다!"
+                    UIAccessibility.post(notification: .layoutChanged, argument: self?.titleLabel)
+                    
+                    
                     self?.motionManager.stopDeviceMotionUpdates()
                     self?.nextButton.isHidden = false
                     self?.nextButton.setup(model: self!.settingButtonViewModel)

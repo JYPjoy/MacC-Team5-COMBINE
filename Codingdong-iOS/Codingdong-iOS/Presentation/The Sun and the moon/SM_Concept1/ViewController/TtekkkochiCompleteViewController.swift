@@ -51,7 +51,6 @@ final class TtekkkochiCompleteViewController: UIViewController {
         label.font = FontManager.body()
         label.textColor = .gs10
         label.numberOfLines = 0
-        label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
         return label
     }()

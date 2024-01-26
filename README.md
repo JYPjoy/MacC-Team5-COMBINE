@@ -3,15 +3,6 @@
 
 <br/>
 
-# 🛠️ 기술 스택
-- 화면 구성: UIkit(Code-Based)
-- 디자인 패턴: MVVM
-- 비동기 프로그래밍: Combine, GCD
-- 데이터베이스: SwiftData
-- 애플 고유 기술: UIAccessibility, CoreMotion, CoreHaptic
-<br/>
-
-
 # 📱 주요 화면
 <img src = "https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/128671453/e8e0d7bd-d11e-40f4-87ff-0c74a71f3254" width = "1000">
 
@@ -19,6 +10,34 @@
 
 <br/>
 
+# 🛠️ 기술 스택
+- MVVM
+- UIkit
+- SwiftData
+- Combine, GCD
+- UIAccessibility, CoreMotion, CoreHaptic
+<br/>
+
+
+# 👥 팀원 소개
+
+|[김규리 (Liv)](https://github.com/LIVV23)|[김하정 (Hazel)](https://github.com/Khajeong)|[박지영 (Joy)](https://github.com/JYPjoy)|
+|:----:|:---:|:---:|
+|`PM`|`Designer`|`Tech Leader`|
+|<img width="180" alt="스크린샷 2023-12-03 오후 12 19 12" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/04baf25d-c80f-44ef-a98d-49be2cd2787f">|<img width="180" alt="스크린샷 2023-12-03 오후 12 19 12" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/0bbe3986-e43a-4014-98e7-844072d17edf">|<img width="180" alt="스크린샷 2023-12-03 오후 12 19 12" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/7ca44ccc-e1b5-4c24-a327-53460dbfeb79">|
+
+|[배정훈 (Sean)](https://github.com/nss321)|[이승용 (Noah)](https://github.com/dtd1232)|[정유빈 (Anna)](https://github.com/addlight19)|
+|:----:|:---:|:---:|
+|`Developer`|`Developer`|`Designer`|
+|<img width="180" alt="스크린샷 2023-12-03 오후 12 19 12" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/eb5bfa3f-6e2f-4cda-8130-f2628939636c">|<img width="180" alt="스크린샷 2023-12-03 오후 12 19 12" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/92c38b19-9194-4e4c-a9d4-5a5358f1c15a">|<img width="180" alt="스크린샷 2023-12-03 오후 12 19 12" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/93d677f4-0f47-4e56-a1e5-6324a8b60435">|
+
+
+<br/>
+
+
 # 🛒 AppStore
-[AppStore](https://apps.apple.com/kr/app/%EC%BD%94%EB%94%A9%EB%8F%99/id6469955220)
+
+|APPSTORE 페이지|서비스 소개 페이지|
+|:----:|:---:|
+|<img src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/8bdde528-9af8-4466-a216-720a4aa7e10b" width=200>|<img src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team5-COMBINE/assets/84610593/2c6aea44-b4f1-4cc0-815f-7a3f32bf28bd" width=200>|
 

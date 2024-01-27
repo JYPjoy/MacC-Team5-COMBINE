@@ -66,7 +66,7 @@ final class CardView: UIView {
         addSubview(containerView)
         [titleLabel, separator, contentLabel, conceptImageView].forEach { containerView.addSubview($0) }
         
-        [containerView, titleLabel, separator, contentLabel, conceptImageView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        [containerView, titleLabel, separator, contentLabel, conceptImageView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: self.topAnchor),

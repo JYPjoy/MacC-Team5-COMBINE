@@ -10,9 +10,6 @@ import Combine
 import Log
 
 final class OnboardingViewController: UIViewController {
-    
-    private var cancellable = Set<AnyCancellable>()
-    private var viewModel = OnboardingViewModel()
     private let permissionManager = PermissionManager()
     
     // MARK: - Components
@@ -57,14 +54,14 @@ final class OnboardingViewController: UIViewController {
     
     private let doneButton = CommonButton()
     private lazy var doneButtonViewModel = CommonbuttonModel(title: "완료", font: FontManager.textbutton(), titleColor: .primary1, backgroundColor: .gs10) {[weak self] in
-        self?.viewModel.tapNextButton()
+        self?.navigationController?.pushViewController(MyBookShelfViewController(), animated: false)
+        self?.navigationController?.setViewControllers([MyBookShelfViewController()], animated: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gs90
         setupView()
-        binding()
         setupAccessibility()
         permissionManager.requestMicPermission()
     }
@@ -99,16 +96,6 @@ final class OnboardingViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-Constants.Button.buttonPadding * 2)
         }
     }
-
-    private func binding() {
-        viewModel.route
-            .sink { [weak self] nextView in
-                self?.navigationController?.pushViewController(nextView, animated: false)
-                self?.navigationController?.setViewControllers([nextView], animated: false)
-            }
-            .store(in: &cancellable)
-    }
-    
     private func setupAccessibility() {
         view.accessibilityElements = [voiceOverTitle, voiceOverDescription, doneButton]
         

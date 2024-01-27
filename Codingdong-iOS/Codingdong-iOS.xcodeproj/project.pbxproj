@@ -68,7 +68,6 @@
 		67BAECFD2B0039F8006FB6D3 /* AndConceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BAECFC2B0039F8006FB6D3 /* AndConceptViewController.swift */; };
 		67D89CAB2B021AF600EC68E3 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89CAA2B021AF600EC68E3 /* PermissionManager.swift */; };
 		67E63EFF2ADE67D000C79863 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E63EFE2ADE67D000C79863 /* UIColor+.swift */; };
-		A80A05332AFFCA9000624BBC /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A05322AFFCA9000624BBC /* OnboardingViewModel.swift */; };
 		A80A05352AFFCE9C00624BBC /* MyBookShelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A05342AFFCE9C00624BBC /* MyBookShelfViewModel.swift */; };
 		A80B88252ADB99CA00091FF5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A80B88242ADB99CA00091FF5 /* SnapKit */; };
 		A80B883C2ADBA3EC00091FF5 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A80B883B2ADBA3EC00091FF5 /* .swiftlint.yml */; };
@@ -179,7 +178,6 @@
 		67BAECFC2B0039F8006FB6D3 /* AndConceptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndConceptViewController.swift; sourceTree = "<group>"; };
 		67D89CAA2B021AF600EC68E3 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		67E63EFE2ADE67D000C79863 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		A80A05322AFFCA9000624BBC /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A80A05342AFFCE9C00624BBC /* MyBookShelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookShelfViewModel.swift; sourceTree = "<group>"; };
 		A80B883B2ADBA3EC00091FF5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A81018542B196EFA007E8475 /* tiger.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tiger.mp3; sourceTree = "<group>"; };
@@ -384,7 +382,6 @@
 		A80A05312AFFCA7B00624BBC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A80A05322AFFCA9000624BBC /* OnboardingViewModel.swift */,
 				A80A05342AFFCE9C00624BBC /* MyBookShelfViewModel.swift */,
 			);
 			path = ViewModel;
@@ -997,7 +994,6 @@
 				67D89CAB2B021AF600EC68E3 /* PermissionManager.swift in Sources */,
 				A8B10D432AFAAE88009EA3F5 /* OnboardingViewController.swift in Sources */,
 				1143C6882AF6A31F0032CE53 /* StoryListTableView.swift in Sources */,
-				A80A05332AFFCA9000624BBC /* OnboardingViewModel.swift in Sources */,
 				A897A9772AFF6FD200008722 /* YugwaCell.swift in Sources */,
 				A8A53A1E2B16FF4D006DD7E3 /* KPIntroViewController.swift in Sources */,
 				670E09A42AFD4540008AA6D5 /* WindowVoiceChildViewController.swift in Sources */,

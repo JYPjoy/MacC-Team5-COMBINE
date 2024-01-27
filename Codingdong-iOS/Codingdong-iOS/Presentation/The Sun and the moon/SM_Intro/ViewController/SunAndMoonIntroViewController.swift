@@ -10,7 +10,6 @@ import Combine
 import Log
 
 final class SunAndMoonIntroViewController: UIViewController, ConfigUI {
-    var viewModel = SunAndMoonIntroViewModel()
     private var cancellable = Set<AnyCancellable>()
     
     private let naviLine: UIView = {
@@ -113,7 +112,7 @@ final class SunAndMoonIntroViewController: UIViewController, ConfigUI {
     private let nextButton = CommonButton()
     
     private lazy var nextButtonViewModel = CommonbuttonModel(title: "시작하기", font: FontManager.textbutton(), titleColor: .primary1, backgroundColor: .gs10, height: 72) {
-        self.viewModel.moveOn()
+        self.navigationController?.pushViewController(TigerEncountViewController(), animated: false)
     }
     
     private let basicPadding = Constants.Button.buttonPadding
@@ -124,7 +123,7 @@ final class SunAndMoonIntroViewController: UIViewController, ConfigUI {
         setupNavigationBar()
         addComponents()
         setConstraints()
-        binding()
+
     }
     
     // Used viewDidLayoutSubView to read the frame of each label
@@ -208,16 +207,6 @@ final class SunAndMoonIntroViewController: UIViewController, ConfigUI {
         view.accessibilityElements?.append(contentsOf: [nextButton, leftBarButtonElement])
     }
 
-    func binding() {
-        nextButton.setup(model: nextButtonViewModel)
-        
-        self.viewModel.route
-            .sink { [weak self] nextView in
-                self?.navigationController?.pushViewController(nextView, animated: false)
-            }
-            .store(in: &cancellable)
-    }
-    
     @objc
     func popThisView() {
         navigationController?.pushViewController(CustomAlert(), animated: false)

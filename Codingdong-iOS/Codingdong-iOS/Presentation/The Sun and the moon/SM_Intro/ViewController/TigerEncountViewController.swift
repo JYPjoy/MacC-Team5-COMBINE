@@ -10,7 +10,6 @@ import Combine
 import Log
 
 final class TigerEncountViewController: UIViewController, ConfigUI {
-    var viewModel = TigerEncounterViewModel()
     private var cancellable = Set<AnyCancellable>()
     
     private let naviLine: UIView = {
@@ -60,7 +59,7 @@ final class TigerEncountViewController: UIViewController, ConfigUI {
     private let nextButton = CommonButton()
     
     private lazy var nextButtonViewModel = CommonbuttonModel(title: "떡꼬치 만들기", font: FontManager.textbutton(), titleColor: .primary1, backgroundColor: .primary2, height: 72) {[weak self] in
-        self?.viewModel.moveOn()
+        self?.navigationController?.pushViewController(TtekkkochiViewController(), animated: false)
     }
     
     private let basicPadding = Constants.Button.buttonPadding
@@ -71,7 +70,6 @@ final class TigerEncountViewController: UIViewController, ConfigUI {
         setupNavigationBar()
         addComponents()
         setConstraints()
-        binding()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,15 +113,7 @@ final class TigerEncountViewController: UIViewController, ConfigUI {
         let leftBarButtonElement = setupLeftBackButtonItemAccessibility(label: "내 책장")
         view.accessibilityElements = [naviTitleElement, contentLabel, nextButton, leftBarButtonElement]
     }
-    
-    func binding() {
-        self.viewModel.route
-            .sink { [weak self] nextView in
-                self?.navigationController?.pushViewController(nextView, animated: false)
-            }
-            .store(in: &cancellable)
-    }
-        
+      
     @objc
     func popThisView() {
         navigationController?.pushViewController(CustomAlert(), animated: false)

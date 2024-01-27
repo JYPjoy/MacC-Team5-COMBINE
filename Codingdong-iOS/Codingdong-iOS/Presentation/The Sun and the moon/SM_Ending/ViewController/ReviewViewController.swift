@@ -12,7 +12,6 @@ final class ReviewViewController: UIViewController, ConfigUI {
     
     // 뷰 전체 model, cellModel
     // MARK: - ViewModel
-    private var viewModel = ReviewViewModel()
     private var cellModels: [CardViewModel] = [.init(title: "만약에 : 조건문", content: "만약에는 코딩의 ‘조건문’과 같아. 조건문은 정해진 상황에 따라 다른 동작을 하게 만들 수 있어.", cardImage: "sm_review1"),
         .init(title: "그리고 : 연산자", content: "그리고는 코딩의 ‘연산자’와 같아. 구멍 세개를 보고 호랑이인 걸 알 수 있었지? 이처럼 여러 조건이 같을 때 정답이 되는 개념이야.", cardImage: "sm_review2"),
         .init(title: "거듭하기 : 반복문", content: "거듭하기는 코딩의 ‘반복문’과 같아. 반복문을 사용하면 같은 동작을 원하는 만큼 자동으로 할 수 있어.", cardImage: "sm_review3")]
@@ -73,7 +72,8 @@ final class ReviewViewController: UIViewController, ConfigUI {
     private let pageControl = UIPageControl()
     private let nextButton = CommonButton()
     private lazy var nextButtonViewModel = CommonbuttonModel(title: "이야기 끝내기", font: FontManager.textbutton(), titleColor: .primary1, backgroundColor: .gs10) {[weak self] in
-        self?.viewModel.endStory()
+    
+        CddDBService().updateFable(FableData(title: "콩쥐팥쥐", isRead: true))
         self?.navigationController?.popToRootViewController(animated: false)
     }
     

@@ -100,12 +100,8 @@
 		A8BC0DB72AE3571D00AD5C9A /* TtekkkochiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BC0DB62AE3571D00AD5C9A /* TtekkkochiCollectionViewCell.swift */; };
 		A8BC0DB92AE358BF00AD5C9A /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BC0DB82AE358BF00AD5C9A /* BasePaddingLabel.swift */; };
 		A8BC0DBE2AE38FE800AD5C9A /* TtekkkochiSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BC0DBD2AE38FE800AD5C9A /* TtekkkochiSelectionView.swift */; };
-		A8BE07F12B00CA7800DD7378 /* SunAndMoonIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BE07F02B00CA7800DD7378 /* SunAndMoonIntroViewModel.swift */; };
-		A8BE07F32B00DBA700DD7378 /* TigerEncounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BE07F22B00DBA700DD7378 /* TigerEncounterViewModel.swift */; };
 		A8BE07F72B00E4E900DD7378 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BE07F62B00E4E900DD7378 /* ReviewViewController.swift */; };
 		A8BE07FA2B00EBF100DD7378 /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BE07F92B00EBF100DD7378 /* ReviewCollectionViewCell.swift */; };
-		A8BE07FD2B00FECA00DD7378 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BE07FC2B00FECA00DD7378 /* ReviewViewModel.swift */; };
-		A8C00F7E2B01FA3500201EAD /* OnuiiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C00F7D2B01FA3500201EAD /* OnuiiViewModel.swift */; };
 		A8C00F822B0209E000201EAD /* RepeatConceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C00F812B0209E000201EAD /* RepeatConceptViewController.swift */; };
 		A8C00F842B021A8200201EAD /* SunMoonOnuiiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C00F832B021A8200201EAD /* SunMoonOnuiiViewController.swift */; };
 		A8C2A8BE2B1720EC00EEDA53 /* KPHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2A8BD2B1720EC00EEDA53 /* KPHouseViewController.swift */; };
@@ -212,12 +208,8 @@
 		A8BC0DB82AE358BF00AD5C9A /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		A8BC0DBC2AE3855B00AD5C9A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A8BC0DBD2AE38FE800AD5C9A /* TtekkkochiSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtekkkochiSelectionView.swift; sourceTree = "<group>"; };
-		A8BE07F02B00CA7800DD7378 /* SunAndMoonIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndMoonIntroViewModel.swift; sourceTree = "<group>"; };
-		A8BE07F22B00DBA700DD7378 /* TigerEncounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TigerEncounterViewModel.swift; sourceTree = "<group>"; };
 		A8BE07F62B00E4E900DD7378 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		A8BE07F92B00EBF100DD7378 /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
-		A8BE07FC2B00FECA00DD7378 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
-		A8C00F7D2B01FA3500201EAD /* OnuiiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnuiiViewModel.swift; sourceTree = "<group>"; };
 		A8C00F812B0209E000201EAD /* RepeatConceptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatConceptViewController.swift; sourceTree = "<group>"; };
 		A8C00F832B021A8200201EAD /* SunMoonOnuiiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunMoonOnuiiViewController.swift; sourceTree = "<group>"; };
 		A8C2A8BD2B1720EC00EEDA53 /* KPHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPHouseViewController.swift; sourceTree = "<group>"; };
@@ -274,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				1143C6C52AFD391E0032CE53 /* View */,
-				A8BE07EF2B00CA5B00DD7378 /* ViewModel */,
 				1143C6C22AFB82880032CE53 /* ViewController */,
 			);
 			path = SM_Intro;
@@ -514,7 +505,6 @@
 		A852B1792B01F8810051BE9E /* SM_Concept3 */ = {
 			isa = PBXGroup;
 			children = (
-				A8C00F7C2B01F9A100201EAD /* ViewModel */,
 				A852B17A2B01F88E0051BE9E /* ViewController */,
 			);
 			path = SM_Concept3;
@@ -606,20 +596,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		A8BE07EF2B00CA5B00DD7378 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				A8BE07F22B00DBA700DD7378 /* TigerEncounterViewModel.swift */,
-				A8BE07F02B00CA7800DD7378 /* SunAndMoonIntroViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		A8BE07F42B00E47700DD7378 /* SM_Ending */ = {
 			isa = PBXGroup;
 			children = (
 				A8BE07F82B00EBB800DD7378 /* View */,
-				A8BE07FB2B00FEBB00DD7378 /* ViewModel */,
 				A8BE07F52B00E48300DD7378 /* ViewController */,
 			);
 			path = SM_Ending;
@@ -640,22 +620,6 @@
 				A8C966EF2B011914005105E8 /* CustomCollectionViewFlowLayout.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		A8BE07FB2B00FEBB00DD7378 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				A8BE07FC2B00FECA00DD7378 /* ReviewViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		A8C00F7C2B01F9A100201EAD /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				A8C00F7D2B01FA3500201EAD /* OnuiiViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		A8C2A8B52B171FBB00EEDA53 /* KP_Concept1 */ = {
@@ -989,7 +953,6 @@
 				A87217C72AE212C6003C0D5C /* TtekkkochiViewController.swift in Sources */,
 				A897A9752AFF6AC000008722 /* Fable.swift in Sources */,
 				116A95532ADF72AB0096760A /* FontManager.swift in Sources */,
-				A8BE07F32B00DBA700DD7378 /* TigerEncounterViewModel.swift in Sources */,
 				A864F00D2AE03FC3007F4012 /* ConfigUI.swift in Sources */,
 				670E09A22AFCAF81008AA6D5 /* WindowVoiceViewController.swift in Sources */,
 				112003D12AE574FB00924FAB /* LottieManager.swift in Sources */,
@@ -1005,7 +968,6 @@
 				11CD0EDC2AFD56B800911B64 /* TigerEncountView.swift in Sources */,
 				1143C6C42AFB829F0032CE53 /* SunAndMoonIntroViewController.swift in Sources */,
 				A8C2A8C42B17217600EEDA53 /* KPEndingViewController.swift in Sources */,
-				A8BE07F12B00CA7800DD7378 /* SunAndMoonIntroViewModel.swift in Sources */,
 				A8BE07FA2B00EBF100DD7378 /* ReviewCollectionViewCell.swift in Sources */,
 				A8BC0DB92AE358BF00AD5C9A /* BasePaddingLabel.swift in Sources */,
 				67E63EFF2ADE67D000C79863 /* UIColor+.swift in Sources */,
@@ -1018,10 +980,8 @@
 				A8C2A8C02B17212100EEDA53 /* KPWorkViewController.swift in Sources */,
 				67BAECF12B000446006FB6D3 /* TigerHandHoleAnimationView.swift in Sources */,
 				67816A4A2AE26FEF00B121B6 /* GiveTtekkViewController.swift in Sources */,
-				A8BE07FD2B00FECA00DD7378 /* ReviewViewModel.swift in Sources */,
 				67BAECFD2B0039F8006FB6D3 /* AndConceptViewController.swift in Sources */,
 				A8C00F822B0209E000201EAD /* RepeatConceptViewController.swift in Sources */,
-				A8C00F7E2B01FA3500201EAD /* OnuiiViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

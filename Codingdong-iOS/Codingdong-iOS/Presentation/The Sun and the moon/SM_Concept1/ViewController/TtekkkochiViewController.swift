@@ -10,7 +10,6 @@ import Combine
 import Log
 
 final class TtekkkochiViewController: UIViewController, ConfigUI {
-    var viewModel = TtekkkochiViewModel()
     private var cancellable = Set<AnyCancellable>()
     private var blockIndex: Int = 0
     private var hapticManager: HapticManager?
@@ -72,7 +71,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
     
     private let nextButton = CommonButton()
     private lazy var settingButtonViewModel = CommonbuttonModel(title: "꼬치를 준다", font: FontManager.textbutton(), titleColor: .primary1, backgroundColor: .primary2) {[weak self] in
-       self?.viewModel.selectItem()
+        self?.navigationController?.pushViewController(  GiveTtekkViewController(), animated: false)
     }
 
     private let ttekkkochiCollectionViewElement: UIAccessibilityElement = {
@@ -158,14 +157,14 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
     }
     
     func binding() {
-        initializeView()
-        self.bottomView.setup(with: viewModel)
-        self.viewModel.route
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] nextView in
-                self?.navigationController?.pushViewController(nextView, animated: false)
-            })
-            .store(in: &cancellable)
+//        initializeView()
+//        self.bottomView.setup(with: viewModel)
+//        self.viewModel.route
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveValue: { [weak self] nextView in
+//                self?.navigationController?.pushViewController(nextView, animated: false)
+//            })
+//            .store(in: &cancellable)
             
         
         self.bottomView.$selectedValue

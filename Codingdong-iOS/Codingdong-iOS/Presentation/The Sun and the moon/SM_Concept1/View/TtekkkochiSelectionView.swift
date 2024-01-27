@@ -10,7 +10,6 @@ import Log
 
 final class TtekkkochiSelectionView: UIView {
     
-    var viewModel: TtekkkochiViewModelRepresentable?
     @Published var selectedValue = ""
     @Published var initialValue: Bool = false
     
@@ -78,12 +77,5 @@ extension TtekkkochiSelectionView: UICollectionViewDelegate {
 extension TtekkkochiSelectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 64)
-    }
-}
-
-extension TtekkkochiSelectionView: TtekkkochiViewRepresentable {
-
-    func setup(with viewModel: TtekkkochiViewModelRepresentable) {
-        self.viewModel = viewModel
     }
 }

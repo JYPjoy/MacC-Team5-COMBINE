@@ -149,6 +149,7 @@ final class SunAndMoonIntroViewController: UIViewController, ConfigUI {
         [introLabel, firstConceptLabel, firstDescriptionLabel, secondConceptLabel, secondDescriptionLabel, thirdConceptLabel, thirdDescriptionLabel, nextButton].forEach {
             view.addSubview($0)
         }
+        nextButton.setup(model: nextButtonViewModel)
     }
     
     func setConstraints() {

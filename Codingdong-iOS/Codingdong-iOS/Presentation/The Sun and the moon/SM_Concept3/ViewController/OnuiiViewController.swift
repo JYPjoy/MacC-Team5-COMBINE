@@ -11,7 +11,6 @@ import Log
 
 final class OnuiiViewController: UIViewController, ConfigUI {
  
-    private var viewModel = TtekkkochiViewModel()
     private var cancellable = Set<AnyCancellable>()
     
     // MARK: - Components

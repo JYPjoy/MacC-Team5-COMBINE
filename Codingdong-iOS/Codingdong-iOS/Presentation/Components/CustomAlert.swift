@@ -21,7 +21,7 @@ final class CustomAlert:UIViewController, ConfigUI {
         let label = UILabel()
         label.font = FontManager.callout()
         label.textColor = .white
-        label.text = "메인으로"
+        label.text = "메인 화면으로"
         label.textAlignment = .center
         return label
     }()
@@ -99,46 +99,39 @@ final class CustomAlert:UIViewController, ConfigUI {
     }
     
     func setConstraints() {
-        alertContainer.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(340)
-            $0.left.right.equalToSuperview().inset(62)
-        }
+        [alertContainer, alertTitle, alertContent, horizontalLine, verticalLine, cancelLabel, applyLabel].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        alertTitle.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.left.right.equalToSuperview().inset(16)
-        }
-        
-        alertContent.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(16)
-            $0.bottom.equalTo(horizontalLine.snp.top).offset(-16)
-        }
-        
-        horizontalLine.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-44)
-            $0.height.equalTo(0.33)
-        }
-        
-        verticalLine.snp.makeConstraints {
-            $0.top.equalTo(horizontalLine.snp.bottom)
-            $0.width.equalTo(0.33)
-            $0.centerX.bottom.equalToSuperview()
-        }
-        
-        cancelLabel.snp.makeConstraints {
-            $0.top.equalTo(horizontalLine.snp.bottom).offset(10)
-            $0.width.equalToSuperview().multipliedBy(0.5)
-            $0.centerX.equalToSuperview().multipliedBy(0.5)
-            $0.bottom.equalToSuperview().inset(9)
-        }
+        NSLayoutConstraint.activate([
+            alertContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 340),
+            alertContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -340),
+            alertContainer.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 62),
+            alertContainer.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -62),
+            
+            alertTitle.topAnchor.constraint(equalTo: alertContainer.topAnchor, constant: 20),
+            alertTitle.leftAnchor.constraint(equalTo: alertContainer.leftAnchor, constant: 16),
+            alertTitle.rightAnchor.constraint(equalTo: alertContainer.rightAnchor, constant: -16),
+            
+            alertContent.topAnchor.constraint(equalTo: alertContainer.topAnchor),
+            alertContent.bottomAnchor.constraint(equalTo: alertContainer.bottomAnchor, constant: -16),
+            alertContent.leftAnchor.constraint(equalTo: alertContainer.leftAnchor, constant: 16),
+            alertContent.rightAnchor.constraint(equalTo: alertContainer.rightAnchor, constant: -16),
 
-        applyLabel.snp.makeConstraints {
-            $0.top.equalTo(horizontalLine.snp.bottom).offset(10)
-            $0.width.equalToSuperview().multipliedBy(0.5)
-            $0.centerX.equalToSuperview().multipliedBy(1.5)
-            $0.bottom.equalToSuperview().inset(9)
-        }
+            horizontalLine.bottomAnchor.constraint(equalTo:  alertContainer.bottomAnchor, constant: -44),
+            horizontalLine.heightAnchor.constraint(equalToConstant: 0.33),
+            horizontalLine.leftAnchor.constraint(equalTo: alertContainer.leftAnchor),
+            horizontalLine.rightAnchor.constraint(equalTo:  alertContainer.rightAnchor),
+            
+            verticalLine.topAnchor.constraint(equalTo: horizontalLine.bottomAnchor),
+            verticalLine.widthAnchor.constraint(equalToConstant: 0.33),
+            verticalLine.centerXAnchor.constraint(equalTo: alertContainer.centerXAnchor),
+            verticalLine.bottomAnchor.constraint(equalTo: alertContainer.bottomAnchor),
+            
+            cancelLabel.topAnchor.constraint(equalTo: horizontalLine.bottomAnchor, constant: 10),
+            cancelLabel.leftAnchor.constraint(equalTo: alertContainer.leftAnchor, constant: 49),
+            
+            applyLabel.topAnchor.constraint(equalTo: horizontalLine.bottomAnchor, constant: 10),
+            applyLabel.rightAnchor.constraint(equalTo: alertContainer.rightAnchor, constant: -33)
+        ])
     }
     
     func setupAccessibility() {

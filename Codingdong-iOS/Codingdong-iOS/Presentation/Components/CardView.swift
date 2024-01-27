@@ -64,35 +64,33 @@ final class CardView: UIView {
     
     public func setupView() {
         addSubview(containerView)
-        containerView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.left.right.equalToSuperview().inset(Constants.Button.buttonPadding)
-        }
-        
         [titleLabel, separator, contentLabel, conceptImageView].forEach { containerView.addSubview($0) }
         
-        titleLabel.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(Constants.Card.cardPadding)
-            $0.top.equalToSuperview().offset(20)
-        }
-        separator.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(Constants.Card.cardPadding)
-            $0.left.equalToSuperview().offset(Constants.Card.cardPadding)
-            $0.right.equalToSuperview().offset(-Constants.Card.cardPadding)
-            $0.height.equalTo(1)
-        }
-        contentLabel.snp.makeConstraints {
-            $0.top.equalTo(separator.snp.bottom).offset(20)
-            $0.left.equalToSuperview().offset(Constants.Card.cardPadding)
-            $0.right.equalToSuperview().offset(-Constants.Card.cardPadding)
-        }
+        [containerView, titleLabel, separator, contentLabel, conceptImageView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        conceptImageView.snp.makeConstraints {
-            $0.bottom.equalTo(containerView.snp.bottom).offset(-76)
-            $0.centerX.equalToSuperview()
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: self.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.Button.buttonPadding),
+            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constants.Button.buttonPadding),
             
-            $0.size.equalTo(CGSize(width: Constants.Card.cardSize, height: Constants.Card.cardSize))
-        }
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            titleLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: Constants.Card.cardPadding),
+            
+            separator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.Card.cardPadding),
+            separator.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: Constants.Card.cardPadding),
+            separator.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -Constants.Card.cardPadding),
+            separator.heightAnchor.constraint(equalToConstant: 1),
+            
+            contentLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 20),
+            contentLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: Constants.Card.cardPadding),
+            contentLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -Constants.Card.cardPadding),
+            
+            conceptImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -76),
+            conceptImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            conceptImageView.widthAnchor.constraint(equalToConstant: Constants.Card.cardSize),
+            conceptImageView.heightAnchor.constraint(equalToConstant: Constants.Card.cardSize)
+        ])
     }
 }
 

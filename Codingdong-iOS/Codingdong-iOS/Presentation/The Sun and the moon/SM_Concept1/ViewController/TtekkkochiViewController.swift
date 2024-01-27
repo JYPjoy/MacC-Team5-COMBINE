@@ -157,15 +157,7 @@ final class TtekkkochiViewController: UIViewController, ConfigUI {
     }
     
     func binding() {
-//        initializeView()
-//        self.bottomView.setup(with: viewModel)
-//        self.viewModel.route
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveValue: { [weak self] nextView in
-//                self?.navigationController?.pushViewController(nextView, animated: false)
-//            })
-//            .store(in: &cancellable)
-            
+        initializeView()
         
         self.bottomView.$selectedValue
             .zip(bottomView.$initialValue)

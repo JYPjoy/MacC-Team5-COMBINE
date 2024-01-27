@@ -2,11 +2,16 @@ import UIKit
 import Log
 import SwiftData
 
+
+protocol StoryListTableViewDelegate: AnyObject {
+    func moveOnToSM()
+    func moveOnToKP()
+}
+
 final class StoryListTableView: UIView {
 
-    var viewModel: MyBookShelfViewModelRepresentable?
     @Published var fableDataList: [FableData]?
-    
+    weak var delegate: StoryListTableViewDelegate?
     // TODO: Separator 오류 해결해야 함
     private lazy var storyListTableView: UITableView = {
         let view = UITableView()
@@ -61,9 +66,9 @@ extension StoryListTableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if fableDataList?[indexPath.row].title == "해님달님" {
-            self.viewModel?.moveOn(.sunmoon)
+            delegate?.moveOnToSM()
         } else if fableDataList?[indexPath.row].title == "콩쥐팥쥐" {
-            self.viewModel?.moveOn(.kongjipatji)
+            delegate?.moveOnToKP()
         }
     }
     
@@ -72,8 +77,3 @@ extension StoryListTableView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension StoryListTableView: MyBookShelfViewRepresentable {
-    func setup(with viewModel: MyBookShelfViewModelRepresentable) {
-        self.viewModel = viewModel
-    }
-}

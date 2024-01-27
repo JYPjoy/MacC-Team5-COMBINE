@@ -22,10 +22,10 @@ enum NextViewType {
     }
 }
 
-final class MyBookShelfViewController: UIViewController, ConfigUI {
+final class MyBookShelfViewController: UIViewController, ConfigUI, StoryListTableViewDelegate {
     
     var window: UIWindow?
-    var viewModel = MyBookShelfViewModel()
+
     private var cancellable = Set<AnyCancellable>()
     
     private let naviLine: UIView = {
@@ -116,12 +116,10 @@ final class MyBookShelfViewController: UIViewController, ConfigUI {
         setupNavigationBar()
         addComponents()
         setConstraints()
-        binding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         fetchData()
-      
     }
     
     func setupRootView() {
@@ -147,14 +145,13 @@ final class MyBookShelfViewController: UIViewController, ConfigUI {
         [storyTitle, badgeTitle, moreTitleButton, moreBadgeButton, storyList, cookieContainer].forEach {
             view.addSubview($0)
         }
-        
+        storyList.delegate = self
         // TODO: 더보기 잠시 해제
         [moreTitleButton, moreBadgeButton].forEach { $0.isHidden = true }
         [innerView, innerLabel].forEach { cookieContainer.addSubview($0) }
     }
     
     func setConstraints() {
-        storyList.setup(with: viewModel)
         
         storyTitle.snp.makeConstraints {
             $0.top.equalToSuperview().offset(122)
@@ -218,18 +215,17 @@ final class MyBookShelfViewController: UIViewController, ConfigUI {
             self.innerView.isHidden = false
         }
     }
-    
-    func binding() {
-        viewModel.route
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] route in
-                self?.navigationController?.pushViewController(route.viewController, animated: false)
-            }
-            .store(in: &cancellable)
-    }
 }
 
 extension MyBookShelfViewController {
+    // MARK: - View 전환
+    func moveOnToSM() {
+        self.navigationController?.pushViewController(SunAndMoonIntroViewController(), animated: false)
+    }
+    func moveOnToKP() {
+        self.navigationController?.pushViewController(KPIntroViewController(), animated: false)
+    }
+
     enum MoreButtonType: Int {
         case moreTitle = 1
         case moreBadge = 2
